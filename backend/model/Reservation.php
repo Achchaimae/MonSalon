@@ -118,7 +118,7 @@
             $preparedSQL = $this->Dbh->prepare($sql);
             $preparedSQL->execute();
             $reservations = $preparedSQL->fetchAll(PDO::FETCH_OBJ);
-            echo json_encode(array("reservations list :" => $reservations));
+            echo json_encode(array("all_reservation" => $reservations));
 
         }
 

@@ -17,11 +17,16 @@
         // === Add a reservation === //
         public function setReservation($customerReference, $reservationService, $reservationDate, $barberID,$reservatioDateDay) 
         {
-            $setReservation = $this->ReservationModel->setReservation($customerReference, $reservationService, $reservationDate, $barberID, $reservatioDateDay);
-            if($setReservation) {
-                return true;
-            }else{
-                return false;
+            $checkReservationByUser = $this->ReservationModel->displayUserReservations($customerReference);
+            if ($checkReservationByUser) {
+                echo json_encode(['status' => 'error', 'message' => 'You already have a reservation']);
+            } else {
+                $setReservation = $this->ReservationModel->setReservation($customerReference, $reservationService, $reservationDate, $barberID, $reservatioDateDay);
+                if($setReservation) {
+                    return true;
+                }else{
+                    return false;
+                }
             }
         }
         // === Update a reservation === //
